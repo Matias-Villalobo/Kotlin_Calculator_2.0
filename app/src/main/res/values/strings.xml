@@ -1,3 +1,19 @@
 <resources>
     <string name="app_name">MyKotlinCalculator2.1</string>
+    <string name="main_screen_btn_text_seven">7</string>
+    <string name="main_screen_btn_text_eight">8</string>
+    <string name="main_screen_btn_text_nine">9</string>
+    <string name="main_screen_btn_text_sum">+</string>
+    <string name="main_screen_btn_text_four">4</string>
+    <string name="main_screen_btn_text_five">5</string>
+    <string name="main_screen_btn_text_six">6</string>
+    <string name="main_screen_btn_text_minus">-</string>
+    <string name="main_screen_btn_text_one">1</string>
+    <string name="main_screen_btn_text_two">2</string>
+    <string name="main_screen_btn_text_three">3</string>
+    <string name="main_screen_btn_text_zero">0</string>
+    <string name="main_screen_btn_text_erase">C</string>
+    <string name="main_screen_btn_text_split">/</string>
+    <string name="main_screen_btn_text_multiplication">X</string>
+    <string name="main_screen_btn_text_result">=</string>
 </resources>

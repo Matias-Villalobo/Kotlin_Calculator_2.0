@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="main_result_tv_size">36sp</dimen>
+    <dimen name="main_result_tv_height">200dp</dimen>
+    <dimen name="main_btn_padding">5dp</dimen>
+    <dimen name="main_btn_size">16sp</dimen>
+    <dimen name="operations_btns_margin">5dp</dimen>
+    <dimen name="number_btns_margin">5dp</dimen>
+</resources>
