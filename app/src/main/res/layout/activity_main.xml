@@ -1,18 +1,154 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".MainActivity">
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:id="@+id/screen_text_example"
+        style="@style/CalculatorScreenInterface"
+        android:layout_width="match_parent" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <LinearLayout
+        style="@style/LinearWeightValue"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/button_number_seven"
+            style="@style/CalculatorNumbersButton"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/main_screen_btn_text_seven" />
+
+        <Button
+            android:id="@+id/button_number_eight"
+            style="@style/CalculatorNumbersButton"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/main_screen_btn_text_eight" />
+
+        <Button
+            android:id="@+id/button_number_nine"
+            style="@style/CalculatorNumbersButton"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/main_screen_btn_text_nine" />
+
+        <Button
+            android:id="@+id/button_function_sum"
+            style="@style/CalculatorOperationsButton"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/main_screen_btn_text_sum" />
+    </LinearLayout>
+
+    <LinearLayout
+        style="@style/LinearWeightValue"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/button_number_four"
+            style="@style/CalculatorNumbersButton"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/main_screen_btn_text_four" />
+
+        <Button
+            android:id="@+id/button_number_five"
+            style="@style/CalculatorNumbersButton"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/main_screen_btn_text_five" />
+
+        <Button
+            android:id="@+id/button_number_six"
+            style="@style/CalculatorNumbersButton"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/main_screen_btn_text_six" />
+
+        <Button
+            android:id="@+id/button_function_minus"
+            style="@style/CalculatorOperationsButton"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/main_screen_btn_text_minus" />
+    </LinearLayout>
+
+    <LinearLayout
+        style="@style/LinearWeightValue"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/button_number_one"
+            style="@style/CalculatorNumbersButton"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/main_screen_btn_text_one" />
+
+        <Button
+            android:id="@+id/button_number_two"
+            style="@style/CalculatorNumbersButton"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/main_screen_btn_text_two" />
+
+        <Button
+            android:id="@+id/button_number_three"
+            style="@style/CalculatorNumbersButton"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/main_screen_btn_text_three" />
+
+        <Button
+            android:id="@+id/button_function_multiplication"
+            style="@style/CalculatorOperationsButton"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/main_screen_btn_text_multiplication" />
+    </LinearLayout>
+
+    <LinearLayout
+        style="@style/LinearWeightValue"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/button_number_zero"
+            style="@style/CalculatorNumbersButton"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/main_screen_btn_text_zero" />
+
+        <Button
+            android:id="@+id/button_function_divide"
+            style="@style/CalculatorOperationsButton"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/main_screen_btn_text_split" />
+
+        <Button
+            android:id="@+id/button_function_erase"
+            style="@style/CalculatorOperationsButton"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/main_screen_btn_text_erase" />
+
+        <Button
+            android:id="@+id/button_function_result"
+            style="@style/CalculatorOperationsButton"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/main_screen_btn_text_result" />
+    </LinearLayout>
+
+</LinearLayout>
