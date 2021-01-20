@@ -9,6 +9,6 @@ class CalculatorPresenter(
 
     override fun numberPressed(number: String) {
         model.saveNumber(number)
-        view.drawNumber(model.getResult()!!)
+        view.drawNumber(model.getResult())
     }
 }

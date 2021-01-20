@@ -7,7 +7,7 @@ interface CalculatorContract {
 
     interface CalculatorModelContract {
         fun saveNumber(number: String)
-        fun getResult(): String?
+        fun getResult(): String
     }
 
     interface CalculatorViewContract {
