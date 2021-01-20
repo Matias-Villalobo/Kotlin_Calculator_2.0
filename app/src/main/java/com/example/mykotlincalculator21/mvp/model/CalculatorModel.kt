@@ -10,7 +10,7 @@ class CalculatorModel : CalculatorContract.CalculatorModelContract {
         firstOperand = number
     }
 
-    override fun getResult(): String? {
+    override fun getResult(): String {
         return firstOperand
     }
 }
