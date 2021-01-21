@@ -1,7 +1,12 @@
 package com.example.mykotlincalculator21.mvp.model
 
 import com.example.mykotlincalculator21.mvp.contract.CalculatorContract
-import com.example.mykotlincalculator21.utils.*
+import com.example.mykotlincalculator21.utils.EMPTY_STRING
+import com.example.mykotlincalculator21.utils.ERROR_MESSAGE
+import com.example.mykotlincalculator21.utils.OPERATOR_DIVIDE
+import com.example.mykotlincalculator21.utils.OPERATOR_MINUS
+import com.example.mykotlincalculator21.utils.OPERATOR_MULTIPLY
+import com.example.mykotlincalculator21.utils.OPERATOR_SUM
 
 class CalculatorModel : CalculatorContract.CalculatorModelContract {
     private var firstOperand: String = EMPTY_STRING
@@ -17,31 +22,19 @@ class CalculatorModel : CalculatorContract.CalculatorModelContract {
         }
     }
 
-    override fun getPartialResult(): String {
-        return (firstOperand + operator + secondOperand)
-    }
+    override fun getPartialResult() = "$firstOperand$operator$secondOperand"
 
     override fun getFullResult(): String {
-        when (operator) {
-            OPERATOR_SUM -> result =
-                ((java.lang.Double.parseDouble(firstOperand) + java.lang.Double.parseDouble(
-                    secondOperand
-                ))).toString()
-            OPERATOR_MINUS -> result =
-                ((java.lang.Double.parseDouble(firstOperand) - java.lang.Double.parseDouble(
-                    secondOperand
-                ))).toString()
-            OPERATOR_DIVIDE -> result =
-                ((java.lang.Double.parseDouble(firstOperand) / java.lang.Double.parseDouble(
-                    secondOperand
-                ))).toString()
-            OPERATOR_MULTIPLY -> result =
-                ((java.lang.Double.parseDouble(firstOperand) * java.lang.Double.parseDouble(
-                    secondOperand
-                ))).toString()
-            else -> result = ERROR_MESSAGE
+        var firstOperandValue = firstOperand.toDouble()
+        var secondOperandValue = secondOperand.toDouble()
+
+        return when (operator) {
+            OPERATOR_SUM -> (firstOperandValue + secondOperandValue).toString()
+            OPERATOR_MINUS -> (firstOperandValue - secondOperandValue).toString()
+            OPERATOR_DIVIDE -> (firstOperandValue / secondOperandValue).toString()
+            OPERATOR_MULTIPLY -> (firstOperandValue * secondOperandValue).toString()
+            else -> ERROR_MESSAGE
         }
-        return result
     }
 
     override fun eraseResult(): String {
