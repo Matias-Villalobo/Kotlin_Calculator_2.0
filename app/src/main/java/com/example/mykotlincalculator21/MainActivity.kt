@@ -32,11 +32,28 @@ class MainActivity : AppCompatActivity() {
         numberPressed(binding.buttonNumberSeven)
         numberPressed(binding.buttonNumberEight)
         numberPressed(binding.buttonNumberNine)
-        numberPressed(binding.buttonFunctionErase)
+        erase(binding.buttonFunctionErase)
+        operationSymbolPressed(binding.buttonFunctionDivide)
+        operationSymbolPressed(binding.buttonFunctionMultiplication)
+        operationSymbolPressed(binding.buttonFunctionSum)
+        operationSymbolPressed(binding.buttonFunctionMinus)
+        operatorResultPressed(binding.buttonFunctionResult)
     }
 
     private fun numberPressed(button: Button) {
         button.setOnClickListener { presenter.numberPressed(button.text.toString()) }
+    }
+
+    private fun operationSymbolPressed(button: Button) {
+        button.setOnClickListener { presenter.operationSymbolPressed(button.text.toString()) }
+    }
+
+    private fun operatorResultPressed(button: Button) {
+        button.setOnClickListener { presenter.operatorResultPressed() }
+    }
+
+    private fun erase(button: Button) {
+        button.setOnClickListener { presenter.erase() }
     }
 
 }
