@@ -9,6 +9,19 @@ class CalculatorPresenter(
 
     override fun numberPressed(number: String) {
         model.saveNumber(number)
-        view.drawNumber(model.getResult())
+        view.drawNumber(model.getPartialResult())
+    }
+
+    override fun operationSymbolPressed(operatorUsed: String) {
+        model.saveOperationSymbol(operatorUsed)
+        view.drawNumber(model.getPartialResult())
+    }
+
+    override fun operatorResultPressed() {
+        view.drawNumber(model.getFullResult())
+    }
+
+    override fun erase() {
+        view.drawNumber(model.eraseResult())
     }
 }

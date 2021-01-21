@@ -14,6 +14,6 @@
     <string name="main_screen_btn_text_zero">0</string>
     <string name="main_screen_btn_text_erase">C</string>
     <string name="main_screen_btn_text_split">/</string>
-    <string name="main_screen_btn_text_multiplication">X</string>
+    <string name="main_screen_btn_text_multiplication">*</string>
     <string name="main_screen_btn_text_result">=</string>
 </resources>

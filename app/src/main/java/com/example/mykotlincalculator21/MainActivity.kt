@@ -2,6 +2,7 @@ package com.example.mykotlincalculator21
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
 import com.example.mykotlincalculator21.databinding.ActivityMainBinding
 import com.example.mykotlincalculator21.mvp.contract.CalculatorContract
@@ -32,11 +33,20 @@ class MainActivity : AppCompatActivity() {
         numberPressed(binding.buttonNumberSeven)
         numberPressed(binding.buttonNumberEight)
         numberPressed(binding.buttonNumberNine)
-        numberPressed(binding.buttonFunctionErase)
+        operationSymbolPressed(binding.buttonFunctionDivide)
+        operationSymbolPressed(binding.buttonFunctionMultiplication)
+        operationSymbolPressed(binding.buttonFunctionSum)
+        operationSymbolPressed(binding.buttonFunctionMinus)
+        binding.buttonFunctionErase.setOnClickListener { presenter.erase() }
+        binding.buttonFunctionResult.setOnClickListener { presenter.operatorResultPressed() }
     }
 
     private fun numberPressed(button: Button) {
         button.setOnClickListener { presenter.numberPressed(button.text.toString()) }
+    }
+
+    private fun operationSymbolPressed(button: Button) {
+        button.setOnClickListener { presenter.operationSymbolPressed(button.text.toString()) }
     }
 
 }
