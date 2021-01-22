@@ -28,8 +28,8 @@ class CalculatorModel : CalculatorContract.CalculatorModelContract {
     }
 
     override fun getValue(): String {
-        var firstValue = (firstOperandUtils.getValue()).toString()
-        var secondValue = (secondOperandUtils.getValue()).toString()
+        var firstValue: String = (firstOperandUtils.getValue()).toString()
+        var secondValue: String = (secondOperandUtils.getValue()).toString()
         if (secondOperandUtils.isEmpty()) {
             secondValue = EMPTY_STRING
         }
@@ -115,14 +115,14 @@ class CalculatorModel : CalculatorContract.CalculatorModelContract {
         return EMPTY_STRING
     }
 
-    override fun saveOperationSymbol(operatorSymbol: String) {
-        if (firstOperandUtils.isEmpty()) {
+    override fun saveOperationSymbol(operatorSymbol: String) = when {
+        firstOperandUtils.isEmpty() -> {
             firstOperandUtils.signs = OPERATOR_MINUS
-        } else if (operator.isEmpty()) {
-            operator = operatorSymbol
-        } else {
-            secondOperandUtils.signs = OPERATOR_MINUS
         }
+        operator.isEmpty() -> {
+            operator = operatorSymbol
+        }
+        else -> secondOperandUtils.signs = OPERATOR_MINUS
     }
 
     override fun getError() = error
