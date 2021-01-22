@@ -10,18 +10,18 @@ class CalculatorPresenter(
 
     override fun numberPressed(number: String) {
         model.saveNumber(number)
-        view.drawNumber(model.getPartialResult())
+        view.drawNumber(model.getValue())
     }
 
     override fun operationSymbolPressed(operatorUsed: String) {
         model.saveOperationSymbol(operatorUsed)
-        view.drawNumber(model.getPartialResult())
+        view.drawNumber(model.getValue())
     }
 
     override fun operatorResultPressed() {
         model.doOperations()
         when (model.getError()) {
-            ErrorUtils.NONE -> {
+            ErrorUtils.SUCCESS -> {
                 view.drawNumber(model.getResult())
             }
             ErrorUtils.ERROR_MESSAGE -> {

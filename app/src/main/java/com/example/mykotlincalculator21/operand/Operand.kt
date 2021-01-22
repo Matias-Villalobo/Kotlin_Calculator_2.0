@@ -1,10 +1,10 @@
-package com.example.mykotlincalculator21.utils
+package com.example.mykotlincalculator21.operand
 
 import com.example.mykotlincalculator21.utils.NumbersUtils.ZERO_NUMBER_DOUBLE_TYPE
 import com.example.mykotlincalculator21.utils.StringUtils.EMPTY_STRING
 
-class OperandUtils {
-    var signs = EMPTY_STRING
+class Operand {
+    var signs: String = EMPTY_STRING
     var value = EMPTY_STRING
 
     fun eraseOperands() {
@@ -13,20 +13,14 @@ class OperandUtils {
     }
 
     fun getValue(): Double {
-        if (value === EMPTY_STRING) {
-            return ZERO_NUMBER_DOUBLE_TYPE
+        return if (value == EMPTY_STRING) {
+            ZERO_NUMBER_DOUBLE_TYPE
         } else {
-            return (signs + value).toDouble()
+            (signs + value).toDouble()
         }
     }
 
-    fun setSign(sign: String) {
-        this.signs = sign
-    }
-
-    fun isEmpty(): Boolean {
-        return value.isEmpty()
-    }
+    fun isEmpty() = value.isEmpty()
 
     fun addNumber(number: String) {
         value += number
