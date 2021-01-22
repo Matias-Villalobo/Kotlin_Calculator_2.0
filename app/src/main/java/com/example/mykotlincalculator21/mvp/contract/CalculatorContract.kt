@@ -1,5 +1,7 @@
 package com.example.mykotlincalculator21.mvp.contract
 
+import com.example.mykotlincalculator21.utils.ErrorUtils
+
 interface CalculatorContract {
     interface CalculatorPresenterContract {
         fun numberPressed(number: String)
@@ -16,15 +18,26 @@ interface CalculatorContract {
 
         fun getPartialResult(): String
 
-        fun getFullResult(): String
+        fun getResult(): String
 
         fun eraseResult(): String
 
         fun saveOperationSymbol(operatorSymbol: String)
 
+        fun doOperations()
+
+        fun getError(): ErrorUtils
+
     }
 
     interface CalculatorViewContract {
         fun drawNumber(number: String)
+
+        fun showErrorDivision()
+
+        fun showErrorInvalidOperation()
+
+        fun showErrorMessage()
+
     }
 }
