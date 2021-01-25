@@ -16,4 +16,7 @@
     <string name="main_screen_btn_text_split">/</string>
     <string name="main_screen_btn_text_multiplication">*</string>
     <string name="main_screen_btn_text_result">=</string>
+    <string name="error_message_in_division">Error, can not divide by zero</string>
+    <string name="error_message_when_invalid_format">Error: Invalid format</string>
+    <string name="error_generic_message">Error, unknown Symbol used</string>
 </resources>

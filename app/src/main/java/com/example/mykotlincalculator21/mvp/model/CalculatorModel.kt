@@ -1,52 +1,127 @@
 package com.example.mykotlincalculator21.mvp.model
 
 import com.example.mykotlincalculator21.mvp.contract.CalculatorContract
-import com.example.mykotlincalculator21.utils.EMPTY_STRING
-import com.example.mykotlincalculator21.utils.ERROR_MESSAGE
-import com.example.mykotlincalculator21.utils.OPERATOR_DIVIDE
-import com.example.mykotlincalculator21.utils.OPERATOR_MINUS
-import com.example.mykotlincalculator21.utils.OPERATOR_MULTIPLY
-import com.example.mykotlincalculator21.utils.OPERATOR_SUM
+import com.example.mykotlincalculator21.utils.ResultUtils
+import com.example.mykotlincalculator21.utils.NumbersUtils.POSITION_ONE
+import com.example.mykotlincalculator21.utils.NumbersUtils.POSITION_ZERO
+import com.example.mykotlincalculator21.utils.NumbersUtils.ZERO_NUMBER_DOUBLE_TYPE
+import com.example.mykotlincalculator21.operand.Operand
+import com.example.mykotlincalculator21.utils.StringUtils.EMPTY_STRING
+import com.example.mykotlincalculator21.utils.StringUtils.OPERATOR_DIVIDE
+import com.example.mykotlincalculator21.utils.StringUtils.OPERATOR_MINUS
+import com.example.mykotlincalculator21.utils.StringUtils.OPERATOR_MULTIPLY
+import com.example.mykotlincalculator21.utils.StringUtils.OPERATOR_SUM
 
 class CalculatorModel : CalculatorContract.CalculatorModelContract {
-    private var firstOperand: String = EMPTY_STRING
-    private var secondOperand: String = EMPTY_STRING
+    private val firstOperandUtils = Operand()
+    private val secondOperandUtils = Operand()
     private var operator: String = EMPTY_STRING
-    private var result: String = EMPTY_STRING
+    private var resultOperation: String = EMPTY_STRING
+    private var result = ResultUtils.SUCCESS
 
     override fun saveNumber(number: String) {
         if (operator.isEmpty()) {
-            firstOperand += number
+            firstOperandUtils.concatenateNumber(number)
         } else {
-            secondOperand += number
+            secondOperandUtils.concatenateNumber(number)
         }
     }
 
-    override fun getPartialResult() = "$firstOperand$operator$secondOperand"
-
-    override fun getFullResult(): String {
-        var firstOperandValue = firstOperand.toDouble()
-        var secondOperandValue = secondOperand.toDouble()
-
-        return when (operator) {
-            OPERATOR_SUM -> (firstOperandValue + secondOperandValue).toString()
-            OPERATOR_MINUS -> (firstOperandValue - secondOperandValue).toString()
-            OPERATOR_DIVIDE -> (firstOperandValue / secondOperandValue).toString()
-            OPERATOR_MULTIPLY -> (firstOperandValue * secondOperandValue).toString()
-            else -> ERROR_MESSAGE
+    override fun getValue(): String {
+        var firstValue: String = (firstOperandUtils.getValue()).toString()
+        var secondValue: String = (secondOperandUtils.getValue()).toString()
+        if (secondOperandUtils.isEmpty()) {
+            secondValue = EMPTY_STRING
         }
+        return "$firstValue$operator$secondValue"
+    }
+
+    private fun isValidOperation(): Boolean = when {
+        operator.isEmpty() && firstOperandUtils.isEmpty() -> {
+            false
+        }
+        operator.isNotEmpty() -> {
+            resultOperation = java.lang.String.valueOf(firstOperandUtils.getValue())
+            true
+        }
+        firstOperandUtils.isEmpty() -> {
+            true
+        }
+        secondOperandUtils.isEmpty() -> {
+            result = ResultUtils.ERROR_MESSAGE_INVALID_FORMAT
+            false
+        }
+        else -> true
+    }
+
+    override fun doOperations() {
+        if (isValidOperation()) {
+
+            when (operator) {
+                OPERATOR_SUM -> {
+                    resultOperation =
+                        (firstOperandUtils.getValue() + secondOperandUtils.getValue()).toString()
+                    result = ResultUtils.SUCCESS
+                }
+                OPERATOR_MINUS -> {
+                    resultOperation =
+                        (firstOperandUtils.getValue() - secondOperandUtils.getValue()).toString()
+                    result = ResultUtils.SUCCESS
+                }
+                OPERATOR_DIVIDE -> if (secondOperandUtils.getValue() == ZERO_NUMBER_DOUBLE_TYPE) {
+                    resultOperation = EMPTY_STRING
+                    result = ResultUtils.ERROR_MESSAGE_DIVISION
+                } else {
+                    resultOperation =
+                        (firstOperandUtils.getValue() / secondOperandUtils.getValue()).toString()
+                    result = ResultUtils.SUCCESS
+                }
+                OPERATOR_MULTIPLY -> {
+                    resultOperation =
+                        (firstOperandUtils.getValue() * secondOperandUtils.getValue()).toString()
+                    result = ResultUtils.SUCCESS
+                }
+                else -> {
+                    ResultUtils.ERROR_MESSAGE.toString()
+                    resultOperation = EMPTY_STRING
+                }
+            }
+            updateFirstOperand()
+            secondOperandUtils.eraseOperands()
+        }
+    }
+
+    override fun getOperationResult(): String = resultOperation
+
+    private fun updateFirstOperand() {
+        if (resultOperation.substring(POSITION_ZERO).equals(OPERATOR_MINUS)) {
+            firstOperandUtils.signs = OPERATOR_MINUS
+            firstOperandUtils.value =
+                resultOperation.substring(POSITION_ONE, resultOperation.length)
+        } else {
+            firstOperandUtils.signs = EMPTY_STRING
+            firstOperandUtils.value = resultOperation
+        }
+        operator = EMPTY_STRING
     }
 
     override fun eraseResult(): String {
-        result = EMPTY_STRING
-        firstOperand = EMPTY_STRING
-        secondOperand = EMPTY_STRING
+        resultOperation = EMPTY_STRING
+        firstOperandUtils.eraseOperands()
+        secondOperandUtils.eraseOperands()
         operator = EMPTY_STRING
         return EMPTY_STRING
     }
 
-    override fun saveOperationSymbol(operatorSymbol: String) {
-        operator = operatorSymbol
+    override fun saveOperationSymbol(operatorSymbol: String) = when {
+        firstOperandUtils.isEmpty() -> {
+            firstOperandUtils.signs = OPERATOR_MINUS
+        }
+        operator.isEmpty() -> {
+            operator = operatorSymbol
+        }
+        else -> secondOperandUtils.signs = OPERATOR_MINUS
     }
 
+    override fun getResult() = result
 }
