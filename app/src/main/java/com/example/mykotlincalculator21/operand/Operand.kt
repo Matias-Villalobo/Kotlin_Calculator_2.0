@@ -5,7 +5,7 @@ import com.example.mykotlincalculator21.utils.StringUtils.EMPTY_STRING
 
 class Operand {
     var signs: String = EMPTY_STRING
-    var value = EMPTY_STRING
+    var value: String = EMPTY_STRING
 
     fun eraseOperands() {
         signs = EMPTY_STRING
@@ -22,7 +22,7 @@ class Operand {
 
     fun isEmpty() = value.isEmpty()
 
-    fun addNumber(number: String) {
+    fun concatenateNumber(number: String) {
         value += number
     }
 }

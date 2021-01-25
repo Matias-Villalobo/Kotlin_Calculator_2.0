@@ -21,9 +21,9 @@ class CalculatorModel : CalculatorContract.CalculatorModelContract {
 
     override fun saveNumber(number: String) {
         if (operator.isEmpty()) {
-            firstOperandUtils.addNumber(number)
+            firstOperandUtils.concatenateNumber(number)
         } else {
-            secondOperandUtils.addNumber(number)
+            secondOperandUtils.concatenateNumber(number)
         }
     }
 
