@@ -1,6 +1,6 @@
 package com.example.mykotlincalculator21.mvp.contract
 
-import com.example.mykotlincalculator21.utils.ErrorUtils
+import com.example.mykotlincalculator21.utils.ResultUtils
 
 interface CalculatorContract {
     interface CalculatorPresenterContract {
@@ -17,7 +17,7 @@ interface CalculatorContract {
         fun eraseResult(): String
         fun saveOperationSymbol(operatorSymbol: String)
         fun doOperations()
-        fun getError(): ErrorUtils
+        fun getError(): ResultUtils
     }
 
     interface CalculatorViewContract {

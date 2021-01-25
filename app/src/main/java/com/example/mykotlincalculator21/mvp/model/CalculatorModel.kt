@@ -1,7 +1,7 @@
 package com.example.mykotlincalculator21.mvp.model
 
 import com.example.mykotlincalculator21.mvp.contract.CalculatorContract
-import com.example.mykotlincalculator21.utils.ErrorUtils
+import com.example.mykotlincalculator21.utils.ResultUtils
 import com.example.mykotlincalculator21.utils.NumbersUtils.POSITION_ONE
 import com.example.mykotlincalculator21.utils.NumbersUtils.POSITION_ZERO
 import com.example.mykotlincalculator21.utils.NumbersUtils.ZERO_NUMBER_DOUBLE_TYPE
@@ -17,7 +17,7 @@ class CalculatorModel : CalculatorContract.CalculatorModelContract {
     private val secondOperandUtils = Operand()
     private var operator: String = EMPTY_STRING
     private var result: String = EMPTY_STRING
-    private var error = ErrorUtils.SUCCESS
+    private var error = ResultUtils.SUCCESS
 
     override fun saveNumber(number: String) {
         if (operator.isEmpty()) {
@@ -50,7 +50,7 @@ class CalculatorModel : CalculatorContract.CalculatorModelContract {
             true
         }
         secondOperandUtils.isEmpty() -> {
-            error = ErrorUtils.ERROR_MESSAGE_INVALID_FORMAT
+            error = ResultUtils.ERROR_MESSAGE_INVALID_FORMAT
             result = EMPTY_STRING
             false
         }
@@ -64,28 +64,28 @@ class CalculatorModel : CalculatorContract.CalculatorModelContract {
                 OPERATOR_SUM -> {
                     result =
                         (firstOperandUtils.getValue() + secondOperandUtils.getValue()).toString()
-                    error = ErrorUtils.SUCCESS
+                    error = ResultUtils.SUCCESS
                 }
                 OPERATOR_MINUS -> {
                     result =
                         (firstOperandUtils.getValue() - secondOperandUtils.getValue()).toString()
-                    error = ErrorUtils.SUCCESS
+                    error = ResultUtils.SUCCESS
                 }
                 OPERATOR_DIVIDE -> if (secondOperandUtils.getValue() == ZERO_NUMBER_DOUBLE_TYPE) {
                     result = EMPTY_STRING
-                    error = ErrorUtils.ERROR_MESSAGE_DIVISION
+                    error = ResultUtils.ERROR_MESSAGE_DIVISION
                 } else {
                     result =
                         (firstOperandUtils.getValue() / secondOperandUtils.getValue()).toString()
-                    error = ErrorUtils.SUCCESS
+                    error = ResultUtils.SUCCESS
                 }
                 OPERATOR_MULTIPLY -> {
                     result =
                         (firstOperandUtils.getValue() * secondOperandUtils.getValue()).toString()
-                    error = ErrorUtils.SUCCESS
+                    error = ResultUtils.SUCCESS
                 }
                 else -> {
-                    ErrorUtils.ERROR_MESSAGE.toString()
+                    ResultUtils.ERROR_MESSAGE.toString()
                     result = EMPTY_STRING
                 }
             }

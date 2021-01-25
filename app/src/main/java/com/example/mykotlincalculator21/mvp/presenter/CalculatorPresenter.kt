@@ -1,7 +1,7 @@
 package com.example.mykotlincalculator21.mvp.presenter
 
 import com.example.mykotlincalculator21.mvp.contract.CalculatorContract
-import com.example.mykotlincalculator21.utils.ErrorUtils
+import com.example.mykotlincalculator21.utils.ResultUtils
 
 class CalculatorPresenter(
     private val model: CalculatorContract.CalculatorModelContract,
@@ -21,16 +21,16 @@ class CalculatorPresenter(
     override fun operatorResultPressed() {
         model.doOperations()
         when (model.getError()) {
-            ErrorUtils.SUCCESS -> {
+            ResultUtils.SUCCESS -> {
                 view.drawNumber(model.getResult())
             }
-            ErrorUtils.ERROR_MESSAGE -> {
+            ResultUtils.ERROR_MESSAGE -> {
                 view.showErrorMessage()
             }
-            ErrorUtils.ERROR_MESSAGE_DIVISION -> {
+            ResultUtils.ERROR_MESSAGE_DIVISION -> {
                 view.showErrorDivision()
             }
-            ErrorUtils.ERROR_MESSAGE_INVALID_FORMAT -> {
+            ResultUtils.ERROR_MESSAGE_INVALID_FORMAT -> {
                 view.showErrorInvalidOperation()
             }
         }
