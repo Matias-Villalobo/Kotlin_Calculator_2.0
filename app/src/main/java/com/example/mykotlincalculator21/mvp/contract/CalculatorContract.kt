@@ -13,11 +13,11 @@ interface CalculatorContract {
     interface CalculatorModelContract {
         fun saveNumber(number: String)
         fun getValue(): String
-        fun getResult(): String
+        fun getOperationResult(): String
         fun eraseResult(): String
         fun saveOperationSymbol(operatorSymbol: String)
         fun doOperations()
-        fun getError(): ResultUtils
+        fun getResult(): ResultUtils
     }
 
     interface CalculatorViewContract {

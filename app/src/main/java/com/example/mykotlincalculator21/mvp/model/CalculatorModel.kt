@@ -16,8 +16,8 @@ class CalculatorModel : CalculatorContract.CalculatorModelContract {
     private val firstOperandUtils = Operand()
     private val secondOperandUtils = Operand()
     private var operator: String = EMPTY_STRING
-    private var result: String = EMPTY_STRING
-    private var error = ResultUtils.SUCCESS
+    private var resultOperation: String = EMPTY_STRING
+    private var result = ResultUtils.SUCCESS
 
     override fun saveNumber(number: String) {
         if (operator.isEmpty()) {
@@ -38,20 +38,20 @@ class CalculatorModel : CalculatorContract.CalculatorModelContract {
 
     private fun isValidOperation(): Boolean = when {
         operator.isEmpty() && firstOperandUtils.isEmpty() -> {
-            result = EMPTY_STRING
+            resultOperation = EMPTY_STRING
             false
         }
         operator.isNotEmpty() -> {
-            result = java.lang.String.valueOf(firstOperandUtils.getValue())
+            resultOperation = java.lang.String.valueOf(firstOperandUtils.getValue())
             true
         }
         firstOperandUtils.isEmpty() -> {
-            result = EMPTY_STRING
+            resultOperation = EMPTY_STRING
             true
         }
         secondOperandUtils.isEmpty() -> {
-            error = ResultUtils.ERROR_MESSAGE_INVALID_FORMAT
-            result = EMPTY_STRING
+            result = ResultUtils.ERROR_MESSAGE_INVALID_FORMAT
+            resultOperation = EMPTY_STRING
             false
         }
         else -> true
@@ -62,31 +62,31 @@ class CalculatorModel : CalculatorContract.CalculatorModelContract {
 
             when (operator) {
                 OPERATOR_SUM -> {
-                    result =
+                    resultOperation =
                         (firstOperandUtils.getValue() + secondOperandUtils.getValue()).toString()
-                    error = ResultUtils.SUCCESS
+                    result = ResultUtils.SUCCESS
                 }
                 OPERATOR_MINUS -> {
-                    result =
+                    resultOperation =
                         (firstOperandUtils.getValue() - secondOperandUtils.getValue()).toString()
-                    error = ResultUtils.SUCCESS
+                    result = ResultUtils.SUCCESS
                 }
                 OPERATOR_DIVIDE -> if (secondOperandUtils.getValue() == ZERO_NUMBER_DOUBLE_TYPE) {
-                    result = EMPTY_STRING
-                    error = ResultUtils.ERROR_MESSAGE_DIVISION
+                    resultOperation = EMPTY_STRING
+                    result = ResultUtils.ERROR_MESSAGE_DIVISION
                 } else {
-                    result =
+                    resultOperation =
                         (firstOperandUtils.getValue() / secondOperandUtils.getValue()).toString()
-                    error = ResultUtils.SUCCESS
+                    result = ResultUtils.SUCCESS
                 }
                 OPERATOR_MULTIPLY -> {
-                    result =
+                    resultOperation =
                         (firstOperandUtils.getValue() * secondOperandUtils.getValue()).toString()
-                    error = ResultUtils.SUCCESS
+                    result = ResultUtils.SUCCESS
                 }
                 else -> {
                     ResultUtils.ERROR_MESSAGE.toString()
-                    result = EMPTY_STRING
+                    resultOperation = EMPTY_STRING
                 }
             }
             updateFirstOperand()
@@ -94,21 +94,21 @@ class CalculatorModel : CalculatorContract.CalculatorModelContract {
         }
     }
 
-    override fun getResult(): String = result
+    override fun getOperationResult(): String = resultOperation
 
     private fun updateFirstOperand() {
-        if (result.substring(POSITION_ZERO).equals(OPERATOR_MINUS)) {
+        if (resultOperation.substring(POSITION_ZERO).equals(OPERATOR_MINUS)) {
             firstOperandUtils.signs = OPERATOR_MINUS
-            firstOperandUtils.value = result.substring(POSITION_ONE, result.length)
+            firstOperandUtils.value = resultOperation.substring(POSITION_ONE, resultOperation.length)
         } else {
             firstOperandUtils.signs = EMPTY_STRING
-            firstOperandUtils.value = result
+            firstOperandUtils.value = resultOperation
         }
         operator = EMPTY_STRING
     }
 
     override fun eraseResult(): String {
-        result = EMPTY_STRING
+        resultOperation = EMPTY_STRING
         firstOperandUtils.eraseOperands()
         secondOperandUtils.eraseOperands()
         operator = EMPTY_STRING
@@ -125,5 +125,5 @@ class CalculatorModel : CalculatorContract.CalculatorModelContract {
         else -> secondOperandUtils.signs = OPERATOR_MINUS
     }
 
-    override fun getError() = error
+    override fun getResult() = result
 }

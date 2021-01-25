@@ -20,9 +20,9 @@ class CalculatorPresenter(
 
     override fun operatorResultPressed() {
         model.doOperations()
-        when (model.getError()) {
+        when (model.getResult()) {
             ResultUtils.SUCCESS -> {
-                view.drawNumber(model.getResult())
+                view.drawNumber(model.getOperationResult())
             }
             ResultUtils.ERROR_MESSAGE -> {
                 view.showErrorMessage()
