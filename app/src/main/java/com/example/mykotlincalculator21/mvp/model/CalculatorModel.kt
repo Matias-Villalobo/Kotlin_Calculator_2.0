@@ -21,9 +21,9 @@ class CalculatorModel : CalculatorContract.CalculatorModelContract {
 
     override fun saveNumber(number: String) {
         if (operator.isEmpty()) {
-            firstOperandUtils.addNumber(number)
+            firstOperandUtils.concatenateNumber(number)
         } else {
-            secondOperandUtils.addNumber(number)
+            secondOperandUtils.concatenateNumber(number)
         }
     }
 
@@ -38,7 +38,6 @@ class CalculatorModel : CalculatorContract.CalculatorModelContract {
 
     private fun isValidOperation(): Boolean = when {
         operator.isEmpty() && firstOperandUtils.isEmpty() -> {
-            resultOperation = EMPTY_STRING
             false
         }
         operator.isNotEmpty() -> {
@@ -46,12 +45,10 @@ class CalculatorModel : CalculatorContract.CalculatorModelContract {
             true
         }
         firstOperandUtils.isEmpty() -> {
-            resultOperation = EMPTY_STRING
             true
         }
         secondOperandUtils.isEmpty() -> {
             result = ResultUtils.ERROR_MESSAGE_INVALID_FORMAT
-            resultOperation = EMPTY_STRING
             false
         }
         else -> true
@@ -99,7 +96,8 @@ class CalculatorModel : CalculatorContract.CalculatorModelContract {
     private fun updateFirstOperand() {
         if (resultOperation.substring(POSITION_ZERO).equals(OPERATOR_MINUS)) {
             firstOperandUtils.signs = OPERATOR_MINUS
-            firstOperandUtils.value = resultOperation.substring(POSITION_ONE, resultOperation.length)
+            firstOperandUtils.value =
+                resultOperation.substring(POSITION_ONE, resultOperation.length)
         } else {
             firstOperandUtils.signs = EMPTY_STRING
             firstOperandUtils.value = resultOperation

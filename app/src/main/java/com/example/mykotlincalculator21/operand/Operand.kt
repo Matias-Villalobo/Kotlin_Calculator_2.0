@@ -22,7 +22,7 @@ class Operand {
 
     fun isEmpty() = value.isEmpty()
 
-    fun addNumber(number: String) {
+    fun concatenateNumber(number: String) {
         value += number
     }
 }
