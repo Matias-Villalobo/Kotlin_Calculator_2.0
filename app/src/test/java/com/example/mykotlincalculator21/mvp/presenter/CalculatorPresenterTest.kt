@@ -1,5 +1,6 @@
 package com.example.mykotlincalculator21.mvp.presenter
 
+import com.example.mykotlincalculator21.mvp.contract.CalculatorContract
 import com.example.mykotlincalculator21.mvp.model.CalculatorModel
 import com.example.mykotlincalculator21.mvp.view.CalculatorView
 import com.example.mykotlincalculator21.utils.ErrorUtils
@@ -20,12 +21,13 @@ import org.junit.Before
 import org.junit.Test
 
 class CalculatorPresenterTest {
-    private lateinit var presenter: CalculatorPresenter
-    private var model = CalculatorModel()
+    private lateinit var presenter: CalculatorContract.CalculatorPresenterContract
+    private lateinit var model: CalculatorContract.CalculatorModelContract
     private var view: CalculatorView = mock()
 
     @Before
     fun setup() {
+        model = CalculatorModel()
         presenter = CalculatorPresenter(model, view)
     }
 
