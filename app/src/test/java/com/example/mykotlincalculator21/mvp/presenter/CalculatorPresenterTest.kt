@@ -33,6 +33,8 @@ class CalculatorPresenterTest {
 
     @Test
     fun eraseTest() {
+        model.saveOperationSymbol(OPERATOR_MINUS)
+        model.saveNumber(NUMBER_THREE)
         presenter.erase()
         assertEquals(EMPTY_STRING, model.getResult())
         verify(view).drawNumber(EMPTY_STRING)
@@ -48,7 +50,7 @@ class CalculatorPresenterTest {
 
     @Test
     fun testOperationSymbolPressedNegative() {
-        model.saveNumber(NUMBER_THREE)//ojo aca
+        model.saveNumber(NUMBER_THREE)
         presenter.operationSymbolPressed(OPERATOR_MINUS)
         verify(view).drawNumber(NUMBER_THREE + OPERATOR_MINUS)
         assertEquals(NUMBER_THREE + OPERATOR_MINUS, model.getValue())
@@ -109,7 +111,8 @@ class CalculatorPresenterTest {
     fun testSecondOperandNegativePressed() {
         model.saveNumber(NUMBER_THREE)
         model.saveOperationSymbol(OPERATOR_SUM)
-        presenter.numberPressed(OPERATOR_MINUS + NUMBER_THREE)
+        model.saveOperationSymbol(OPERATOR_MINUS)
+        presenter.numberPressed(NUMBER_THREE)
         verify(view).drawNumber(model.getValue())
         assertEquals(NUMBER_THREE + OPERATOR_SUM + OPERATOR_MINUS + NUMBER_THREE, model.getValue())
     }
